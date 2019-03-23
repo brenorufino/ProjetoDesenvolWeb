@@ -1,0 +1,35 @@
+
+  <div class="card-header">
+        <div class="row">
+                <div class="col1">
+                    <img [src]="urlProfessor" height="180px" width="150px">
+                </div>
+                <div class="col1">
+                    <h5>Nome: {{professor.nome}}</h5>
+                    <h5>Matricula: {{professor.matricula}}</h5>
+                    <h5>Email: {{professor.email}}</h5>
+                </div>
+                <div class="col1">
+                    <img [src]="urlUnicap" height="180px" width="150px">  
+                </div>
+                
+            </div>
+  </div>
+  <div class="card-body table-responsive">
+      <table class="table table-bordered">
+          <thead>
+          <tr>
+              <th>Código</th>
+              <th>Descricao</th>
+              <th>Quantidade de Creditos</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let disc of disciplinas">
+              <td>{{disc.codigo}}</td>
+              <td>{{disc.descricao}}</td>
+              <td>{{disc.qtdCreditos}}</td>
+          </tr>
+          </tbody>
+    </table>
+</div>
