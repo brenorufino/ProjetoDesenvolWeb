@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
-import { ProfService } from './shared/services/prof.service';
+import { ProfessoresService } from './shared/services/professores.service';
 
 
 
@@ -20,7 +20,7 @@ import { ProfService } from './shared/services/prof.service';
         AppRoutingModule
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard, ProfService],
+    providers: [AuthGuard, ProfessoresService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

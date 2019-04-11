@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfService } from 'src/app/shared/services/prof.service';
+import { ProfessoresService } from 'src/app/shared/services/professores.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,11 +11,14 @@ export class HomeComponent implements OnInit {
   professores: any[];
   urlUnicap =  'http://www.unicap.br/ppgd/wp-content/uploads/2016/12/marca_2025_altaresol.png';
   constructor(
-    private servprof: ProfService
+    private servprof: ProfessoresService
   ) { }
 
   ngOnInit() {
-    this.professores = this.servprof.getProfessores();
+    this.servprof.getListaProfessores()
+    .subscribe({
+      next: response => this.professores = response
+    });
   }
 
 }

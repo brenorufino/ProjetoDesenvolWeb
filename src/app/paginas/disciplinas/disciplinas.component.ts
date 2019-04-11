@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProfService } from 'src/app/shared/services/prof.service';
+import { ProfessoresService } from 'src/app/shared/services/professores.service';
+import { DisciplinasService } from 'src/app/shared/services/disciplinas.service';
 
 @Component({
   selector: 'app-disciplinas',
@@ -15,7 +16,8 @@ export class DisciplinasComponent implements OnInit {
   urlUnicap =  'http://www.unicap.br/ppgd/wp-content/uploads/2016/12/marca_2025_altaresol.png';
   constructor(
     private route: ActivatedRoute,
-    private servprof: ProfService,
+    private servprof: ProfessoresService,
+    private servdisc: DisciplinasService,
     private router: Router,
   ) { }
 
@@ -23,37 +25,12 @@ export class DisciplinasComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.matricula = params.id;
     });
-    this.disciplinas = this.inicializaDisciplinas();
-    this.professor = this.servprof.getByMatricula(this.matricula);
-    if (!this.professor) {
-      this.router.navigate(['not-found']);
-    }
+    this.servprof.getByMatricula(this.matricula).subscribe(resp => {
+      this.professor = resp;
+      if (!this.professor) {
+        this.router.navigate(['not-found']);
+      }
+    });
+    this.servdisc.getListaDisciplinas().subscribe(resp => this.disciplinas = resp);
   }
-
-  inicializaDisciplinas() {
-    return [
-      {
-        codigo: 'INF1904',
-        descricao: 'Desenvolvimento WEB',
-        qtdCreditos: 5
-      },
-      {
-        codigo: 'INF3512',
-        descricao: 'Programação Orientada a Objetos',
-        qtdCreditos: 4
-      },
-      {
-        codigo: 'INF2146',
-        descricao: 'Programação Funcional',
-        qtdCreditos: 4
-      },
-      {
-        codigo: 'INF2004',
-        descricao: 'Introdução a Programação',
-        qtdCreditos: 4
-      },
-    ];
-  }
-
-
 }
